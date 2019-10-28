@@ -25,6 +25,7 @@ RecyclerView.Adapter<MainAdapter.Holder>(){
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){
         val personPhoto = itemView?.findViewById<ImageView>(R.id.personPhoto)
         val name = itemView?.findViewById<TextView>(R.id.name)
+        val age = itemView?.findViewById<TextView>(R.id.age)
 
         fun connect(data:Data, context: Context){
             if(data.image != ""){
@@ -35,6 +36,7 @@ RecyclerView.Adapter<MainAdapter.Holder>(){
                 personPhoto?.setImageResource(R.mipmap.ic_launcher)
 
             name?.text = data.name
+            age?.text = data.age
         }
     }
 

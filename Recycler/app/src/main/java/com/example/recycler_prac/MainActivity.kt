@@ -9,14 +9,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     var nameLIst = arrayListOf<Data>(
-        Data("sadfdafas석준","dog"),
-        Data("준","miki"),
-        Data("ddd",""),
-        Data("adfa", ""),
-        Data("dafa",""),
-        Data("cccc",""),
-        Data("bbb",""),
-        Data("rrr","")
+        Data("sadfdafas석준","17","dog"),
+        Data("준","10","miki"),
+        Data("ddd","7",""),
+        Data("adfa", "2",""),
+        Data("dafa","1",""),
+        Data("cccc","0",""),
+        Data("bbb","5",""),
+        Data("rrr","12","")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
