@@ -6,20 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-open class MainFragment : Fragment()
+open class OneFragment: Fragment()
 {
-    fun newInstance():MainFragment
+    fun newInstance(): OneFragment
     {
         val args = Bundle()
 
-        val frags = MainFragment()
-        frags.arguments = args
+        val frag = OneFragment()
+        frag.arguments = args
 
-        return frags
+        return frag
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        val v = inflater.inflate(R.layout.activity_content_main, container, false)
+        val v = inflater.inflate(R.layout.activity_content_one, container, false)
         return v
     }
 }
