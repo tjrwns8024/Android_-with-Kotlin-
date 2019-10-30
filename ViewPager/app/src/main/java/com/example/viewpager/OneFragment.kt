@@ -18,7 +18,7 @@ open class OneFragment: Fragment()
         return frag
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
     {
         val v = inflater.inflate(R.layout.activity_content_one, container, false)
         return v

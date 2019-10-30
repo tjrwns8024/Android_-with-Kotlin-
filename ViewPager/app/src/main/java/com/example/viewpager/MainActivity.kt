@@ -1,6 +1,7 @@
 package com.example.viewpager
 
 import PagerAdapter
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
@@ -19,5 +20,6 @@ class MainActivity : AppCompatActivity() {
 
         val tab = findViewById<TabLayout>(R.id.tab)
         tab.setupWithViewPager(pager)
+
     }
 }

@@ -29,7 +29,7 @@ class PagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm)
         val title = when(position)
         {
             1 -> "one"
-            2 -> "tow"
+            2 -> "two"
             3 -> "three"
             else -> "main"
         }
