@@ -8,15 +8,19 @@ import androidx.fragment.app.Fragment
 
 open class MainFragment : Fragment()
 {
-    fun newInstance():MainFragment
-    {
-        val args = Bundle()
+    companion object{
+        fun newInstance():MainFragment
+        {
+            val args = Bundle()
 
-        val frags = MainFragment()
-        frags.arguments = args
+            val frags = MainFragment()
+            frags.arguments = args
 
-        return frags
+            return frags
+        }
     }
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         val v = inflater.inflate(R.layout.activity_content_main, container, false)

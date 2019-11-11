@@ -9,15 +9,18 @@ import androidx.fragment.app.Fragment
 
 open class ThreeFragment: Fragment()
 {
-    fun newInstance(): ThreeFragment
-    {
-        val args = Bundle()
+    companion object{
+        fun newInstance(): ThreeFragment
+        {
+            val args = Bundle()
 
-        val frag = ThreeFragment()
-        frag.arguments = args
+            val frag = ThreeFragment()
+            frag.arguments = args
 
-        return frag
+            return frag
+        }
     }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {

@@ -8,20 +8,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+
+
     var nameLIst = arrayListOf<Data>(
-        Data("sadfdafas석준","17","dog"),
-        Data("준","10","miki"),
-        Data("ddd","7",""),
-        Data("adfa", "2",""),
-        Data("dafa","1",""),
-        Data("cccc","0",""),
-        Data("bbb","5",""),
-        Data("rrr","12","")
+        Data("ddd","17","dog")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         val myAdapter= MainAdapter(this, nameLIst)
         mRecyclerView.adapter = myAdapter

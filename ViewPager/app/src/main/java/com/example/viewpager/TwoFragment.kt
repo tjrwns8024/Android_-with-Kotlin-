@@ -8,15 +8,18 @@ import androidx.fragment.app.Fragment
 
 open class TwoFragment: Fragment()
 {
-    fun newInstance(): TwoFragment
-    {
-        val args = Bundle()
+    companion object{
+        fun newInstance(): TwoFragment
+        {
+            val args = Bundle()
 
-        val frag = TwoFragment()
-        frag.arguments = args
+            val frag = TwoFragment()
+            frag.arguments = args
 
-        return frag
+            return frag
+        }
     }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {

@@ -19,7 +19,7 @@ RecyclerView.Adapter<MainAdapter.Holder>(){
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.connect(nameList[position], context)
+        holder.connect(nameList[position], context)
     }
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){
