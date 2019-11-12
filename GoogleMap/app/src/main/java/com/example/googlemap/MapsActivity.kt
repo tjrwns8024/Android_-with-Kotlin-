@@ -103,8 +103,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private fun placeMarkerOnMap(location: LatLng) {
         //MarkerOptions 객체 생성 및 사용자의 현재 위치를 마커 위치로 설정
         val markerOptions = MarkerOptions().position(location)
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(resources, R.drawable.ic_user_location)))
         //지도에 마커 추가
         map.addMarker(markerOptions)
+
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(resources, R.mipmap.ic_user_location)))
     }
 }
