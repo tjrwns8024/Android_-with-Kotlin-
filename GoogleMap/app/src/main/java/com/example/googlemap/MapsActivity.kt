@@ -96,7 +96,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
             }
         }
-
+        //map 타입 지정
+        map.mapType = GoogleMap.MAP_TYPE_NORMAL
     }
 
     private fun placeMarkerOnMap(location: LatLng) {
