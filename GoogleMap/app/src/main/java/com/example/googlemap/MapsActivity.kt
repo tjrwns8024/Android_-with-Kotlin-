@@ -1,7 +1,10 @@
 package com.example.googlemap
 
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -10,14 +13,20 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 
+@Suppress("UNREACHABLE_CODE")
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
     override fun onMarkerClick(p0: Marker?) = false
 
+    //구글 맵 조작을 위한 객체 생성
     private lateinit var map: GoogleMap
+    // 현재 위치 표시를 위한 객체 생성
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var lastLocation: Location
 
+    companion object{
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,14 +52,42 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerC
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val daejeon = LatLng(36.35,127.38)
-        map.addMarker(MarkerOptions().position(daejeon).title("Marker in 대전"))
-        map.moveCamera(CameraUpdateFactory.newLatLng(daejeon))
+   /*         // Add a marker in Sydney and move the camera
+            val daejeon = LatLng(36.35,127.38)
+            map.addMarker(MarkerOptions().position(daejeon).title("Marker in 대전"))
+            map.moveCamera(CameraUpdateFactory.newLatLng(daejeon))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(daejeon,12.0f))*/
 
-        map.getUiSettings().setZoomControlsEnabled(true)
+        map.getUiSettings().isZoomControlsEnabled = true
         map.setOnMarkerClickListener(this)
 
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(daejeon,12.0f))
+        setUpMap()
+    }
+    private fun setUpMap(){
+        if(ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ){
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            return
+
+            // isMyLocationEnabled = true는
+            // 사용자의 위치에 옅은 파란색 점을 그리는 my-location 계층을 활성화한다.
+            // 또한 지도에 버튼을 추가하여, 탭할 때, 지도의 중심을 사용자의 위치에 맞춘다
+            map.isMyLocationEnabled = true
+
+            //현재 사용가능한 가장 최근의 위치를 제공한다.
+            fusedLocationClient.lastLocation.addOnSuccessListener(this){
+                location ->
+
+                //가장 최근의 위치를 검색할 수 있으면 카메라를 사용자의 현재 위치로 이동하십시오.
+                if(location!=null)
+                {
+                    lastLocation = location
+                    val currentLatLng = LatLng(location.latitude,location.longitude)
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng,12f))
+                }
+            }
+
+        }
     }
 }
