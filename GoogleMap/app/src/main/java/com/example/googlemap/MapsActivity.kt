@@ -1,7 +1,6 @@
 package com.example.googlemap
 
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.location.Location
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -102,10 +101,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     private fun placeMarkerOnMap(location: LatLng) {
         //MarkerOptions 객체 생성 및 사용자의 현재 위치를 마커 위치로 설정
-        val markerOptions = MarkerOptions().position(location)
+        val markerOptions = MarkerOptions().position(location).icon(
+            BitmapDescriptorFactory.defaultMarker(
+                BitmapDescriptorFactory.HUE_GREEN
+            )
+        )
         //지도에 마커 추가
         map.addMarker(markerOptions)
 
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(resources, R.mipmap.ic_user_location)))
     }
 }
