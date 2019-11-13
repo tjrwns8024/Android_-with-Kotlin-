@@ -1,8 +1,11 @@
 package com.example.googlemap
 
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -15,6 +18,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import java.io.IOException
 
 @Suppress("UNREACHABLE_CODE")
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -107,8 +111,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 BitmapDescriptorFactory.HUE_GREEN
             )
         )
+        val titleStr = getAddress(location)
+        markerOptions.title(titleStr)
         //지도에 마커 추가
         map.addMarker(markerOptions)
 
+    }
+
+    private fun getAddress(latLng: LatLng): String {
+        val geocoder = Geocoder(this)
+        val addresses: List<Address>?
+        val address: Address?
+        var addressText = ""
+
+        try {
+            //지오코더에게 그 방법으로 전달된 위치로부터 주소를 얻도록 요청한다.
+            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+            //응답에 주소가 포함된 경우 문자열에 주소를 추가하고 반환
+            if (null != addresses && !addresses.isEmpty()) {
+                address = addresses[0]
+                for (i in 0 until address.maxAddressLineIndex) {
+                    addressText += if (i == 0) address.getAddressLine(i) else "\n" + address.getAddressLine(
+                        i
+                    )
+                }
+            }
+        } catch (e: IOException) {
+            Log.e("MapsActivity", e.localizedMessage)
+        }
+        return addressText
     }
 }
