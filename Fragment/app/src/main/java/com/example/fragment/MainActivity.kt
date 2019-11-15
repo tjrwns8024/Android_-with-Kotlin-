@@ -16,6 +16,5 @@ class MainActivity : AppCompatActivity() {
         B_btn.setOnClickListener{
             supportFragmentManager.beginTransaction().replace(R.id.fragment,B_fragment()).commit()
         }
-
     }
 }
