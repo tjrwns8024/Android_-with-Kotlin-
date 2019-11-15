@@ -71,16 +71,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     private fun setUpMap() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
             return
         }
 
@@ -125,20 +119,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         var addressText = ""
 
         try {
-            //지오코더에게 그 방법으로 전달된 위치로부터 주소를 얻도록 요청한다.
             addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
-            //응답에 주소가 포함된 경우 문자열에 주소를 추가하고 반환
             if (null != addresses && !addresses.isEmpty()) {
                 address = addresses[0]
                 for (i in 0 until address.maxAddressLineIndex) {
-                    addressText += if (i == 0) address.getAddressLine(i) else "\n" + address.getAddressLine(
-                        i
-                    )
+                    addressText += if (i == 0) address.getAddressLine(i) else "\n" + address.getAddressLine(i)
                 }
             }
         } catch (e: IOException) {
             Log.e("MapsActivity", e.localizedMessage)
         }
+
         return addressText
     }
 }
